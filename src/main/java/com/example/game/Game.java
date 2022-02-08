@@ -50,6 +50,10 @@ public class Game
         itemRepository = new ItemRepository();
         commandRepository = new CommandRepository();
         directionRepository = new DirectionCommandRepository();
+
+        // Efface la console
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     /**
@@ -71,9 +75,11 @@ public class Game
     public void update()
     {
         System.out.println("");
+        System.out.print("> ");
         
         // Attend une saisie utilisateur
         String userInput = scanner.nextLine();
+        System.out.println("");
         
         // Cherche, parmi toutes les commandes existantes, laquelle est capable de traiter la saisie utilisateur
         for (Command command : commands) {
@@ -95,7 +101,10 @@ public class Game
     public void describeCurrentRoom()
     {
         // Affiche la description du lieu actuel
+        System.out.println(String.format("Current room: %s.", currentRoom.getName()));
+        System.out.println("");
         System.out.println(currentRoom.getDescription());
+        System.out.println("");
 
         // Affiche la liste de tous les éléments interactifs disponibles dans le lieu actuel
         List<Item> items = itemRepository.findByRoomAndVisible(currentRoom, true);
@@ -109,6 +118,7 @@ public class Game
             }
             System.out.println(String.join(", ", itemNames) + ".");
         }
+        System.out.println("");
 
         // Affiche la liste de toutes les éléments directions disponibles à partir du lieu actuel
         List<DirectionCommand> directions = directionRepository.findByFromRoom(currentRoom);

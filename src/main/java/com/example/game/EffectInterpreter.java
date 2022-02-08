@@ -30,6 +30,7 @@ public class EffectInterpreter
     public void trigger(MessageEffect effect)
     {
         System.out.println(effect.getMessage());
+        System.out.println("");
     }
 
     /**

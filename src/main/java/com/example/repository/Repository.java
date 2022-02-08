@@ -3,8 +3,8 @@ package com.example.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
+import com.example.service.EntityManagerService;
 
 /**
  * Service spécialisé dans les opérations en base de données
@@ -27,8 +27,7 @@ public abstract class Repository<T>
     public Repository(Class<T> entityType)
     {
         // Crée une instance du gestionnaire d'entités
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("TextBasedAdventure");
-        entityManager = factory.createEntityManager();
+        entityManager = EntityManagerService.getManager();
         this.entityType = entityType;
     }
 
